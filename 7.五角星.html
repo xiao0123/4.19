@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			
+			#canvas{
+				width: 400px;
+				height: 400px;
+				border: solid 1px red;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<canvas id="canvas" width="800" height="800"></canvas>
+		<script type="text/javascript">
+			var canvas=document.querySelector("#canvas");
+			var cxt=canvas.getContext("2d");
+			
+			cxt.lineWidth=5;
+			cxt.strokeStyle="indianred";
+			cxt.translate(400,400)
+			
+			cxt.beginPath()
+			for (var i=0;i<5;i++) {
+				
+				var x1=400*Math.cos(Math.PI/180*18+Math.PI/180*i*72);
+				var y1=-400*Math.sin(Math.PI/180*18+Math.PI/180*i*72);
+				cxt.lineTo(x1,y1);
+				
+				
+				
+				var x2=400*Math.cos(Math.PI/180*(54+i*72))
+				var y2=-400*Math.sin(Math.PI/180*(54+i*72))
+				cxt.lineTo(x2,y2)
+			
+				
+			}
+				cxt.closePath()
+				cxt.stroke()
+			
+			
+			
+			
+			
+		</script>
+		
+		
+		
+		
+	</body>
+</html>
