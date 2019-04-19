@@ -21,30 +21,32 @@
 			var ctx=canvas.getContext("2d");
 			var x = 400, y = 400, d = 200;
 			
-			ctx.arc(x,y,d,0,Math.PI*2,true);
-			
-			function shadow(){
-				
-				ctx.shadowOffsetX=10;
-			ctx.shadowOffsetY=10;
-			ctx.shadowBlur=50;
-			ctx.shadowColor="grey"
-				ctx.fill();
-			}
-			
-			
-			ctx.fillStyle="#FF0000";
-			
+			ctx.clearRect(0,0,800,800)
 			
 			canvas.addEventListener("mousemove",function(e){
 				
 				var xx = x - e.layerX;
 				var yy = y - e.layerY;
 				var isMove = Math.sqrt(xx * xx + yy * yy);
-				if(isMove < d)
-				    run("pink");
-				else
-				    run("black");
+				if(isMove < d){
+					ctx.arc(x,y,d,0,Math.PI*2,true);
+			
+					ctx.shadowOffsetX=10;
+					ctx.shadowOffsetY=10;
+					ctx.shadowBlur=50;
+					ctx.shadowColor="grey"
+					
+					ctx.fillStyle="#FF0000";
+					ctx.fill();
+				}
+				   
+				else{
+					ctx.arc(x,y,d,0,Math.PI*2,true);
+					ctx.fillStyle="#FF0000";
+					ctx.fill();
+					
+				}
+				   
 				
 				
 			})
