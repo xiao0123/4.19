@@ -21,6 +21,7 @@
 		
 		//cxt.translate(x,y)，将原点放置在 （x,y）位置.因为所有的刻度数等都是围绕同心圆来进行的，原点放置在圆心上，是为了方便计算位置坐标。注意，使用了这个方法，后面的绘图都会基于这个原点绘制
 		cxt.translate(400,400);
+		cxt.lineCap="round"
 		
 		
 		// 画时钟外圈
@@ -79,8 +80,21 @@
 				cxt.lineWidth=5;
 				cxt.lineTo(0,60);
 				cxt.lineTo(0,-240);
-				cxt.stroke()
+				cxt.stroke();
+				
+				cxt.beginPath();
+				cxt.arc(0,-200,15,0,Math.PI*2,true);
+				cxt.strokeStyle="red";
+				cxt.lineWidth=5;
+				cxt.stroke();
+				
+				cxt.beginPath();
+				cxt.arc(0,0,15,0,Math.PI*2,true)
+				cxt.fillStyle="blue";
+				cxt.fill();
+				
 				cxt.restore();
+				cxt.closePath()
 				
 			}
 			
@@ -97,6 +111,10 @@
 				
 				cxt.stroke()
 				cxt.restore();
+				
+				
+				
+				
 					
 			}
 			
@@ -121,24 +139,51 @@
 			 	//x	要清除的矩形左上角的 x 坐标;y	要清除的矩形左上角的 y 坐标
 				//width	要清除的矩形的宽度，以像素计;height	要清除的矩形的高度，以像素计
 				//最开始cxt.translate(400,400);把400，400作为中心点，所有画布左上角为（-400，-400）
-			 	cxt.clearRect(-400,-400,800,800)
-			 	
-			 	var now=new Date();
-			 	var h=now.getHours();
-			 	var m=now.getMinutes();
-			 	var s=now.getSeconds();
-			 	
-			 	
-			 	drawclock()
+			 	cxt.clearRect(-400, -400, 800, 800)
+
+			 	var now = new Date();
+			 	var h = now.getHours();
+			 	var m = now.getMinutes();
+			 	var s = now.getSeconds();
+
+			 	drawclock();
+
+			 	drawHour(h, m);
+			 	drawMinute(m, s);
 			 	drawSecond(s);
-				drawMinute(m,s);
-			 	drawHour(h,m);
 			 	
+			 	setTime();
 			 })
-			
-		
-		
-		
+
+
+
+			 	function setTime() {
+			 		
+			 		today = new Date();
+			 		var hour = today.getHours();
+			 		var minute = today.getMinutes();
+			 		var second = today.getSeconds();
+			 		var year = today.getFullYear();
+			 		var month = ((today.getMonth() + 1) < 10) ? "0" + (today.getMonth() + 1) : (today.getMonth() + 1); 
+			 		var date = (today.getDate() < 10) ? "0" + today.getDate() : today.getDate();
+			 		var day = today.getDay(); //星期weekDay[day]
+			 		var weekDay = ['星期日', '星期一', '星期二', "星期三", '星期四', '星期五', '星期六'];
+							 		
+
+			 		
+			 		cxt.font = '30px Cambria Math';
+			 		cxt.textAlign="center";
+			 		//year-month-day  weekday
+//			 		
+			 		cxt.fillText(year + "-" + month + "-" + date + "  " + weekDay[day], 0,100);
+			 		//hour:minute:second
+			 		cxt.fillText(((hour < 10) ? "0" + hour : hour) + ":" + ((minute < 10) ? "0" + minute : minute) + ":" + ((second < 10) ? "0" + second : second), 0,150);
+			 		
+			 		
+
+			 		
+			 	}
+			 	
 	</script>
 	</body>
 </html>
